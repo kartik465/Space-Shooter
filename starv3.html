@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seamless Star Pattern (Symbols) with Transitions</title>
+  <style>
+     body {
+      margin: 0;
+      padding: 0;
+      background: #000; /* Black background */
+      font-family: Arial, sans-serif; /* Font that includes the star symbol */
+      overflow: hidden;
+    }
+
+    .container {
+  position: relative;
+  width: 100vw; /* Set container width to fill viewport */
+  height: 100vh; /* Set container height to fill viewport */
+  background-color: black; /* Set background color for space effect */
+}
+
+.star {
+  position: absolute;
+  font-size: 10px; /* Adjust star size as needed */
+  animation: twinkle 1s infinite alternate;
+}
+
+/* Define star colors */
+.star.yellow {
+  color: yellow;
+}
+
+.star.red {
+  color: red;
+}
+
+.star.white {
+  color: white;
+}
+
+.star.blue {
+  color: blue;
+}
+
+.star.orange {
+  color: orange;
+}
+
+@keyframes twinkle {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+
+    .shooting-star {
+      width: 10px;
+      height: 2px;
+      position: absolute;
+      background: white;
+      animation: shoot 2s linear;
+      border-radius: 100%;
+    }
+
+    @keyframes shoot {
+      0% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(100vw);
+      }
+    }
+
+    /* Twinkle animation with variations */
+    @keyframes twinkle-slow {
+  0% {
+    opacity: 1;
+    color: orange;
+  }
+  33% {
+    color: orange;
+    opacity: 0.7;
+  }
+  66% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    color: yellow; /* Changed to yellow */
+  }
+}
+
+@keyframes twinkle-fast {
+  0% {
+    opacity: 1;
+    color: red; /* New color */
+  }
+  20% {
+    color: red;
+    opacity: 0.7;
+  }
+  40% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 0.7;
+    color: white; /* New color */
+  }
+  100% {
+    opacity: 1;
+    color: white;
+  }
+}
+
+@keyframes twinkle-faint {
+  0% {
+    opacity: 0.5;
+    color: blue; /* New color */
+  }
+  50% {
+    opacity: 0.3;
+    color: blue;
+  }
+  100% {
+    opacity: 0.5;
+    color: blue;
+  }
+}
+
+/* Add more animation keyframes with different colors as desired */
+@keyframes twinkle-purple {
+  0% {
+    opacity: 1;
+    color: purple;
+  }
+  33% {
+    opacity: 0.7;
+    color: purple;
+  }
+  66% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    color: pink;
+  }
+}
+
+@keyframes twinkle-green {
+  0% {
+    opacity: 1;
+    color: green;
+  }
+  33% {
+    opacity: 0.7;
+    color: green;
+  }
+  66% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    color: lime;
+  }
+}
+
+/* ... You can add more for other desired colors */
+
+    @keyframes shootVertical {
+  from { top: 0; }
+  to { top: 100%; } /* Change based on container height */
+}
+.shooting-star {
+  z-index: 1; /* Higher than z-index of regular stars */
+  /* ... other styles */
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <script>
+const container = document.querySelector('.container');
+const starCount = 200; // Total number of stars (symbols)
+
+const desiredColors = ['yellow', 'red', 'white', 'blue', 'orange']; // Array of desired star colors
+
+function getRandomColor() {
+  const randomIndex = Math.floor(Math.random() * desiredColors.length);
+  return desiredColors[randomIndex];
+}
+
+function getRandomBlinkSpeed() {
+  // Generate a random number between 0.5 (fast blink) and 2 (slow blink) seconds
+  return Math.random() * 1.5 + 0.5;
+}
+
+// Create stars
+for (let i = 0; i < starCount; i++) {
+  const element = document.createElement('div');
+  element.classList.add('star');
+  element.classList.add(getRandomColor()); // Add random color class
+  element.textContent = String.fromCharCode(9733); // Set star symbol using char code
+  container.appendChild(element);
+
+  // Randomize star position
+  element.style.top = Math.random() * container.clientHeight + 'px';
+  element.style.left = Math.random() * container.clientWidth + 'px';
+
+  // Set random blink speed using animation
+  const blinkSpeed = getRandomBlinkSpeed() + 's'; // Convert to string for animation
+  element.style.animation = `twinkle ${blinkSpeed} infinite alternate`;
+
+
+  element.classList.add('star');
+element.style.fontSize = '12px'; // Adjust font size as desired (in pixels)
+
+}
+
+
+
+
+
+// Create vertical shooting stars with variations
+for (let i = 0; i < shootingStarCount; i++) {
+  const element = document.createElement('div');
+  element.classList.add('shooting-star');
+  element.style.width = '10px';
+  element.style.height = '10px';
+  element.style.background = getRandomColor(); // Use getRandomColor for shooting star color
+  element.style.borderRadius = '50%'; // Make the shooting star circular
+
+  // Choose random starting position (Y-axis range)
+  const minY = container.clientHeight * 0.1; // Minimum starting position (10% from top)
+  const maxY = container.clientHeight * 0.9; // Maximum starting position (90% from top)
+  const randomY = Math.random() * (maxY - minY) + minY;
+  element.style.top = randomY + 'px';
+  element.style.left = Math.random() * container.clientWidth + 'px'; // Random horizontal position
+
+  // Calculate animation duration with varying speed
+  const distance = container.clientHeight; // Distance is container height
+  const speed = Math.random() * 5 + 1; // Adjust speed range (seconds)
+  const duration = distance / speed + 's';
+
+  // Vertical movement animation
+  const animation = `shootVertical ${duration} linear`;
+  element.style.animation = animation;
+
+  // Random opacity and delay for shooting stars
+  element.style.opacity = Math.random() * 0.5 + 0.5; // Random opacity (0.5 - 1)
+  element.style.animationDelay = Math.random() * 15 + 's'; // Adjust delay range (seconds)
+
+  // Optional: Include shooting stars in twinkle animation
+  // element.style.animation = `${getRandomTwinkle()} 0.5s infinite alternate, ${animation}`;
+
+  container.appendChild(element);
+}
+
+function getDistance(element1, element2) {
+  const rect1 = element1.getBoundingClientRect();
+  const rect2 = element2.getBoundingClientRect();
+
+  const xDiff = rect1.x - rect2.x;
+  const yDiff = rect1.y - rect2.y;
+
+  // Convert pixels to inches (assuming 96 DPI for screen resolution)
+  const pixelsPerInch = window.devicePixelRatio || 1; // Account for device pixel ratio
+  const xDiffInches = xDiff / pixelsPerInch;
+  const yDiffInches = yDiff / pixelsPerInch;
+
+  return Math.sqrt(Math.pow(xDiffInches, 2) + Math.pow(yDiffInches, 2));
+}
+
+// Loop for stars (existing code)
+
+// Loop for shooting stars with overlap check
+for (let i = 0; i < shootingStarCount; i++) {
+  const element = document.createElement('div');
+  // ... (existing code for styling shooting star)
+
+  let tooClose = false;
+
+  // Check for overlap with stars
+  for (let j = 0; j < container.querySelectorAll('.star').length; j++) {
+    const existingStar = container.querySelectorAll('.star')[j];
+    const minDistance = 0.5; // Minimum distance in inches (adjust as needed)
+    if (getDistance(element, existingStar) < minDistance) {
+      tooClose = true;
+      break;
+    }
+  }
+
+  // Check for overlap with existing shooting stars (optional)
+  for (let j = 0; j < container.querySelectorAll('.shooting-star').length; j++) {
+    const existingStar = container.querySelectorAll('.shooting-star')[j];
+    const minDistance = 1; // Minimum distance between shooting stars in inches (optional, adjust as needed)
+    if (getDistance(element, existingStar) < minDistance) {
+      tooClose = true;
+      break;
+    }
+  }
+
+  if (!tooClose) {
+    container.appendChild(element);
+  } else {
+    // Optionally decrease loop counter (i--) to retry creating the shooting star
+    i--;
+  }
+}
+
+
+
+
+
+    </script>
+  </div>
+</body>
+</html>

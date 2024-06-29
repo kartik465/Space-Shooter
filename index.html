@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space Shooter Game</title>
+  <link rel="icon" type="image/x-icon"
+    href="https://img.freepik.com/free-vector/rocket-background-flat-style_23-2147904992.jpg?size=338&ext=jpg&ga=GA1.1.1141335507.1718236800&semt=sph">
+  <link rel="stylesheet" href="startupscrean.css"> <!-- Custom CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    integrity="sha384-Y0ivUuor2qUipdWlsVlv1mJMs2rGwkj5VpiRyV+2SR7V7oy/24AXwy4piF5dDVKQ" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center">
+        <div class="startup-screen">
+          <h1 class="game-title">Space Shooter</h1>
+          <button class="btn btn-primary btn-lg start-btn" onclick="startGame()">Start Game</button>
+          <br>
+          <button type="button" class="feedback-btn" class="btn btn-primary" onclick="openFeedbackForm()"
+            data-bs-target="#exampleModal">
+            Feedback
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Story Section -->
+    <div class="row mt-5">
+      <div class="col-12 text-center">
+        <div class="story-section">
+          <h2>Story</h2>
+          <p>Welcome to the Space Shooter game! Your mission is to navigate through the galaxy, battling enemy
+            spaceships and asteroids. Collect power-ups and upgrades to enhance your spaceship. Beware of the challenges
+            that await you in the far reaches of space!</p>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!-- JavaScript -->
+    <script>
+
+      // Define background music with loop
+      let backgroundMusic = new Audio('Interstellar Main Theme.mp3');
+      backgroundMusic.loop = true;
+
+      // Define game start sound effect
+      let gameStartSound = new Audio('game-start-6104.mp3');
+
+      function startGame() {
+        // Adjust volume of background music
+        backgroundMusic.volume = 0.3; // Adjust this value as needed (0.0 to 1.0)
+
+        // Play the game start sound effect
+        gameStartSound.volume = 0.5; // Adjust this value as needed (0.0 to 1.0)
+        gameStartSound.play();
+
+        // Wait for the sound effect to finish (adjust timeout if necessary)
+        setTimeout(() => {
+          // Redirect to the game page
+          window.location.href = 'galaxy beta2.html';
+        }, 500); // Adjust the delay to match the length of the sound effect
+      }
+
+      // Play background music when the page loads
+      backgroundMusic.play();
+      function openFeedbackForm() {
+    // Function to check if the browser is Firefox
+    function isFirefox() {
+        return typeof InstallTrigger !== 'undefined';
+    }
+
+    // If the browser is Firefox, exit the function
+    if (isFirefox()) {
+        console.log("Feedback form is disabled in Firefox.");
+        return;
+    }
+
+    // Prompt the user for their name
+    var name = prompt("Please enter your name:");
+
+    // Check if name is provided and not empty
+    if (name !== null && name.trim() !== "") {
+        // Prompt for feedback after getting the name
+        var feedback = prompt("Hello " + name + ", please enter your feedback:");
+
+        // Check if feedback is provided and not empty
+        if (feedback !== null && feedback.trim() !== "") {
+            // Process the feedback (for demonstration purpose, you might want to send it to a server)
+            console.log("Feedback submitted:", feedback);
+            alert("Thank you, " + name + ", for your feedback!");
+
+            // Query for additional input
+            var additionalInput = prompt("Would you like to provide additional comments, " + name + "?");
+
+            // Check if additional input is provided and not empty
+            if (additionalInput !== null && additionalInput.trim() !== "") {
+                console.log("Additional comments submitted:", additionalInput);
+                alert("Thank you for your additional comments, " + name + "!");
+            } else if (additionalInput === null) {
+                alert("Additional comments submission canceled for " + name + ".");
+            } else {
+                alert("No additional comments provided.");
+            }
+
+            // Here you can add further logic to handle the additional input
+        } else if (feedback === null) {
+            // Handle the case where the user cancels the feedback prompt
+            alert("Feedback submission canceled for " + name + ".");
+        } else {
+            alert("Feedback cannot be empty. Please try again.");
+        }
+    } else if (name === null) {
+        // Handle the case where the user cancels the name prompt
+        alert("Feedback submission canceled.");
+    } else {
+        alert("Name cannot be empty. Please try again.");
+    }
+}
+    </script>
+</body>
+</html>
